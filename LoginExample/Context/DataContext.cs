@@ -11,7 +11,6 @@ namespace LoginExample.Context
 			
 		}
 
-
 		//her dbset veri tabanındaki bir tabloya karşılık gelmek zorunda. hangi modelleri veri tabanında oluşturmak istersem onları dbset ile yazacağım
 		DbSet<Kullanici> Kullanici { get; set; }
 		DbSet<Bolum> Bolum { get; set; }	

@@ -1,0 +1,68 @@
+﻿@model LoginExample.Dtos.LoginDto
+@{
+    Layout = null;
+}
+
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Signin Template for Bootstrap</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="signin.css" rel="stylesheet">
+	<style>
+
+		#container {
+			width: 500px;
+			height: 0px;
+			background-color: #567;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -50px;
+			margin-top: -50px;
+		}
+
+	</style>
+</head>
+
+<body class="text-center">
+	<div id="login">
+		<h3 class="text-center text-white pt-5">Login form</h3>
+		<div class="container">
+			<div id="login-row" class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form id="login-form" class="form" action="" method="post">
+							<h3 class="text-center text-info">Login</h3>
+							<div class="form-group">
+								<label class="text-info" asp-for="KullaniciKodu"></label><br>
+								<input type="text" asp-for="KullaniciKodu" class="form-control">
+								<span asp-validation-for="KullaniciKodu" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label for="password" class="text-info"></label><br>
+								<input type="text" asp-for="KullaniciSifre" class="form-control">
+								<span asp-validation-for="KullaniciSifre" class="text-danger"></span>
+							</div>
+							<div id="register-link" class="text-right">
+								<a href="#" class="text-info">Register here</a>
+							</div>
+							<button type="submit" class="btn btn-success">Giriş</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
