@@ -1,6 +1,9 @@
 ﻿using LoginExample.Context;
+using LoginExample.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LoginExample.Controllers
 {
@@ -33,6 +36,50 @@ namespace LoginExample.Controllers
 				return Ok(data);
 			}
 			//Find() sadece id ile çalışır
+		}
+
+		[HttpPost]
+		public IActionResult Detay(Kullanici model)
+		{
+			if (model == null)
+			{
+				return RedirectToAction(nameof(Index));
+			}
+
+			//bu arkadaslara dikkat etme
+			ModelState.Remove("Bolum");
+			ModelState.Remove("Departman");
+			if (!ModelState.IsValid)
+			{
+				return View(model);	
+			}
+
+			var data = _dataContext.Kullanici.FirstOrDefault(t => t.Id == model.Id);
+
+
+			if(data == null)
+			{
+				return RedirectToAction(nameof(Index));
+			}
+
+			//1.SEÇENEK
+			//_dataContext.Kullanici.Update(model);
+
+			//2.SEÇENEK : Kullanıcıdan model üzerindeki tüm property'leri almıyorsak/alamıyorsak
+			data.KullaniciKodu = model.KullaniciKodu;
+			data.KullaniciSifre = model.KullaniciSifre;
+			data.AdSoyad = model.AdSoyad;
+			data.EMail = model.EMail;
+			data.DepartmanId = model.DepartmanId;	
+			data.BolumId = model.BolumId;
+
+			//data.GuncelleyenKullaniciId = model.GuncelleyenKullaniciId;
+			_dataContext.Update(data);
+
+			_dataContext.SaveChanges();
+
+
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

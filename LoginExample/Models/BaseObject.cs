@@ -16,5 +16,9 @@ namespace LoginExample.Models
 
 		[Browsable(false)]
 		public string ActiveString => Aktif ? "Aktif" : "Pasif";
+
+		//public int EkleyenKullaniciId { get; set; }	
+
+		//public int GuncelleyenKullaniciId { get; set; }	
 	}
 }
