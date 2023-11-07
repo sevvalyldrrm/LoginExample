@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using LoginExample.Dtos;
 using LoginExample.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoginExample.Controllers
 {
-    public class LOginController : Controller
+    public class LoginController : Controller
     {
-        private readonly DataContext dataContext;
+        private readonly DataContext _dataContext;
 
         //controller tarafından çağırmamız gerekiyor. kontrol etmemiz gerekiyor. bu sebeple aşağıdakii işlemi yapmamız lazım.
-        public LOginController(DataContext dataContext)
+        public LoginController(DataContext dataContext)
         {
-            this.dataContext = dataContext;
+            this._dataContext = dataContext;
         }
 
         public IActionResult Index()
@@ -35,7 +36,15 @@ namespace LoginExample.Controllers
 
             //db den kullanıcı bilgisi sorgulanacak
 
+            //model döndürdük Kullanici o sebeple where kullandık. sorgulama yapılan datanın türünden veri döner. 
+            //FirstOrDefault dediğimiz için modeli dolduracak satırları dönüyor.
+            var data = _dataContext.Kullanici.Include(t=> t .Departman).Where(t => t.KullaniciKodu == loginDto.KullaniciKodu && t.KullaniciSifre == loginDto.KullaniciSifre).FirstOrDefault();
 
+            if (data == null)
+            {
+                ModelState.AddModelError("KullaniciSifre", "Kullanici kodu veya şifre hatalı..");
+                return View(loginDto);
+            }
 
 
 
@@ -44,7 +53,7 @@ namespace LoginExample.Controllers
             //    ModelState.AddModelError("KullaniciKodu", "Kullanici kod boş geçilemez.");
             //    return View(loginDto);
             //}
-            return View();
+            return RedirectToAction(nameof(Index) , "Kullanici");
         }
     }
 }

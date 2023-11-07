@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LoginExample.Models.Kullanici>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>İşlemler</th>
+			<th>@Html.DisplayNameFor(model => model.Id)</th>
+			<th>@Html.DisplayNameFor(model => model.AdSoyad)</th>
+			<th>@Html.DisplayNameFor(model => model.KullaniciKodu)</th>
+			<th>@Html.DisplayNameFor(model => model.KullaniciSifre)</th>
+			<th>@Html.DisplayNameFor(model => model.DepartmanId)</th>
+			<th>@Html.DisplayNameFor(model => model.BolumId)</th>
+			<th>@Html.DisplayNameFor(model => model.ActiveString)</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<a asp-controller="Kullanici" asp-action="Detay" asp-route-id="@item.Id">Detay</a>
+					<a asp-controller="Kullanici" asp-action="Sil" asp-route-id="@item.Id">Sil</a>
+					<a asp-controller="Kullanici" asp-action="Incele" asp-route-id="@item.Id">İncele</a>
+				</td>
+				<td>@Html.DisplayFor(ModelItem => item.Id)</td>
+				<td>@Html.DisplayFor(ModelItem => item.AdSoyad)</td>
+				<td>@Html.DisplayFor(ModelItem => item.KullaniciKodu)</td>
+				<td>@Html.DisplayFor(ModelItem => item.KullaniciSifre)</td>
+				<td>@Html.DisplayFor(ModelItem => item.DepartmanId)</td>
+				<td>@Html.DisplayFor(ModelItem => item.BolumId)</td>
+				<td>@Html.DisplayFor(ModelItem => item.ActiveString)</td>
+			</tr>
+		}
+	</tbody>
+</table>
