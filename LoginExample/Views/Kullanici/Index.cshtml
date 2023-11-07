@@ -18,8 +18,8 @@
 		{
 			<tr>
 				<td>
-					<a asp-controller="Kullanici" asp-action="Detay" asp-route-id="@item.Id">Detay</a>
-					<a asp-controller="Kullanici" asp-action="Sil" asp-route-id="@item.Id">Sil</a>
+					<a asp-controller="Kullanici" asp-action="Detay" asp-route-id="@item.Id">Detay</a> |
+					<a asp-controller="Kullanici" asp-action="Sil" asp-route-id="@item.Id">Sil</a> |
 					<a asp-controller="Kullanici" asp-action="Incele" asp-route-id="@item.Id">İncele</a>
 				</td>
 				<td>@Html.DisplayFor(ModelItem => item.Id)</td>

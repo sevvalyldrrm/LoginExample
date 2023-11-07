@@ -1,1 +1,48 @@
 ﻿@model LoginExample.Models.Kullanici
+
+
+<div class="row">
+	<div class="col-xxl-6">
+		<div class="card card-xxl-stretch">
+			<div class="card-header">
+				<h3>Kullanıcı Detayı</h3>
+			</div>
+			<div class="card-body">
+				<form asp-controller="Kullanici" asp-action="Detay">
+					<div class="mb-3">
+						<label asp-for="AdSoyad" class="from-label"></label>
+						<input asp-for="AdSoyad" class="form-control"/>
+						<span asp-validation-for="AdSoyad" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="EMail" class="from-label"></label>
+						<input asp-for="EMail" class="form-control" type="email" />
+						<span asp-validation-for="EMail" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="KullaniciKodu" class="from-label"></label>
+						<input asp-for="KullaniciKodu" class="form-control"/>
+						<span asp-validation-for="KullaniciKodu" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="KullaniciSifre" class="from-label"></label>
+						<input asp-for="KullaniciSifre" class="form-control" type="password"/>
+						<span asp-validation-for="KullaniciSifre" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="DepartmanId" class="from-label"></label>
+						<input asp-for="DepartmanId" class="form-control" />
+						<span asp-validation-for="DepartmanId" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label asp-for="BolumId" class="from-label"></label>
+						<input asp-for="BolumId" class="form-control" />
+						<span asp-validation-for="BolumId" class="text-danger"></span>
+					</div>
+					<a class="btn btn-secondary" asp-action="Index">Listeye Geri Dön</a>
+					<button type="submit" class="btn btn-success"> Kaydet</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

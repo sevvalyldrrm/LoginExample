@@ -12,6 +12,13 @@ namespace LoginExample.Models
 		public string Tanim { get; set; }
 
 
+
+		[Required(ErrorMessage = "{0} boş geçilemez")]
+		[StringLength(50, ErrorMessage = "{0} alanı en fazla {1} karakter olabilir")]
+		[DisplayName("Bölüm Tanım2")]
+		public string Tanim2 { get; set; }
+
+
 		[StringLength(50, ErrorMessage = "{0} alanı en fazla {1} karakter olabilir")]
 		[DisplayName("Aciklama")]
 		public string Aciklama { get; set; }

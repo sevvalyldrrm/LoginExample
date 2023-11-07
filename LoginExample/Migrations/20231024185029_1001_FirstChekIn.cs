@@ -54,8 +54,8 @@ namespace LoginExample.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AdSoyad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EMail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    KullaniciKodu = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+					EMail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+					KullaniciKodu = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     KullaniciSifre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DepartmanId = table.Column<int>(type: "int", nullable: false),
                     BolumId = table.Column<int>(type: "int", nullable: false),
