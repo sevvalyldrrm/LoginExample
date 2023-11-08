@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LoginExample.Controllers
 {
@@ -23,6 +24,45 @@ namespace LoginExample.Controllers
 			return View(data);
 		}
 
+		public IActionResult Ekle()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult Ekle(Kullanici model)
+		{
+
+			if (model == null)
+			{
+				return RedirectToAction(nameof(Index));
+			}
+
+			//bu arkadaslara dikkat etme
+			ModelState.Remove("Bolum");
+			ModelState.Remove("Departman");
+
+			//model içerisindeki property lerde hata var mı kontrolü 
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			#region Aynı kayıt var mı kontrolünü yapar
+			var data = _dataContext.Kullanici.FirstOrDefault(t=> t.KullaniciKodu == model.KullaniciKodu);	
+			if (data != null)
+			{
+				ModelState.AddModelError("KullaniciKodu", "Bu kullanıcı zaten var.");
+				return View(data);
+			}
+			#endregion
+
+			_dataContext.Kullanici.Add(model);
+			_dataContext.SaveChanges();
+
+			return RedirectToAction(nameof(Index));
+		}
+
 		public IActionResult Detay(int id)
 		{
 			var data = new Models.Kullanici();
@@ -34,7 +74,11 @@ namespace LoginExample.Controllers
 			}
 			catch (Exception ex)
 			{
-				return Ok(data);
+				return Ok(ex.StackTrace);
+			}
+			finally
+			{
+
 			}
 			//Find() sadece id ile çalışır
 		}
