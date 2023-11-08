@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 //uygulama ayaða kaldýrýlýrken bir veritabanýna baðlanacaðýný ve bu veritabaný bilgilerini de appsettings'ten okuyacaðýný öðrettik
 //options -> datacontext'e gönderilecek parametre yaþam alanýný tutar
+
 builder.Services.AddDbContext<LoginExample.Context.DataContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DBConStr"));

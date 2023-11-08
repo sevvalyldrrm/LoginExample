@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LoginExample.Controllers
 {
@@ -79,6 +80,66 @@ namespace LoginExample.Controllers
 			_dataContext.SaveChanges();
 
 
+			return RedirectToAction(nameof(Index));
+		}
+
+
+		public IActionResult Sil(int? id)
+		{
+
+			if (id == null)
+		      return RedirectToAction(nameof(Index));
+
+			//DAL 
+
+			var data = _dataContext.Kullanici.Find(id);
+
+			if (data == null)
+				return RedirectToAction(nameof(Index));
+
+			//Penetrasyon
+			//Ddos
+			//Embeded Atak
+
+			return View(data);
+		}
+
+		//Id'yi aldık. kesin bizim kullandığımız data olmuş oldu. 
+		//burada direkt ilgili Id'yi silme işlemi yapıcak
+		[HttpPost]
+		public IActionResult Sil2(int? Id)
+		{
+			if (Id == null)
+				return RedirectToAction(nameof(Index));
+
+			var data = _dataContext.Kullanici.FirstOrDefault(t => t.Id == Id);
+
+			if (data != null)
+			{
+				_dataContext.Kullanici.Remove(data);
+				_dataContext.SaveChanges();
+			}
+			return RedirectToAction(nameof(Index));
+
+
+		}
+
+		//Burada ise model bekleyecek. İlerde buna IFromFile parametresi ekleyeceğiz. Kullanıcının resimleri varsa bunlara da erişmek için kullanırız model yanında.
+		[HttpPost]
+		public IActionResult Sil(Kullanici model)
+			{
+
+			if (model == null)
+				RedirectToAction(nameof(Index));
+
+			//var data = _dataContext.Kullanici.Where(t => t.Id == model.Id && t.KullaniciKodu == model.KullaniciKodu).FirstOrDefault();
+			var data = _dataContext.Kullanici.FirstOrDefault(t => t.Id == model.Id);
+
+			if (data != null)
+			{
+				_dataContext.Kullanici.Remove(data);
+				_dataContext.SaveChanges();
+			}
 			return RedirectToAction(nameof(Index));
 		}
 	}
